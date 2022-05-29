@@ -1,0 +1,11 @@
+:host /deep/ ng2-smart-table img{
+    width: 15px;
+}
+
+:host /deep/ ng2-smart-table span{
+    margin-right: 5px;
+}
+
+:host /deep/ ng2-st-tbody-custom {
+    display: flex;
+}

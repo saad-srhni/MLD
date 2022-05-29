@@ -1,0 +1,91 @@
+<div style="margin: 10px;">
+    <button class="btn btn-success"  (click)="addElement()" style="margin-right: 2px;">
+<img src="assets/images/add.svg" style="width: 20px;cursor: pointer;">
+Ajouter un collaborateur
+</button>
+<button class="btn btn-info" (click)="init()" >
+<img src="assets/images/update.svg" style="width: 20px;cursor: pointer;" />
+Actualiser
+</button>
+</div>
+
+<ng2-smart-table [settings]="settings" [source]="listCollaborateur" (custom)="onCostumAction($event)"></ng2-smart-table>
+<div style="position: fixed;top:0;width: 100%;height: 100%;background-color: rgba(0, 0, 0, 0.483);"  [ngStyle]="{'display':modal?'block':'none' }">
+<div style="position: absolute;top: 10%;width: 70%;background-color: white;left: 50%;transform: translateX(-50%);padding: 30px;">
+  <form [formGroup]="modalForm" novalidate>
+    <div class="row">
+        <div class="col-6" style="padding: 5px;">
+            Nom
+        </div>
+        <div class="col-6" style="padding: 5px;">
+            <input type="text" class="form-control" formControlName="nom">
+            <span  style="font-size: x-small;color:red;" *ngIf="modalForm.get('nom')?.touched && errorControl['nom'].errors">
+                Vérifier votre Nom
+            </span>
+        </div>
+        <div class="col-6" style="padding: 5px;">
+            Prénom
+        </div>
+        <div class="col-6" style="padding: 5px;">
+            <input type="text" class="form-control" formControlName="prenom">
+            <span  style="font-size: x-small;color:red;" *ngIf="modalForm.get('prenom')?.touched && errorControl['prenom'].errors">
+                Vérifier votre Prenom
+            </span>
+        </div>
+        <div class="col-6" style="padding: 5px;">
+            Date naissance
+        </div>
+        <div class="col-6" style="padding: 5px;">
+            <input type="date" class="form-control" formControlName="datenaissance">
+            <span  style="font-size: x-small;color:red;" *ngIf="modalForm.get('datenaissance')?.touched && errorControl['datenaissance'].errors">
+                Vérifier votre date naissance
+            </span>
+        </div>
+        <div class="col-6" style="padding: 5px;">
+            Matricule
+        </div>
+        <div class="col-6" style="padding: 5px;">
+            <input type="number" class="form-control" formControlName="matricule" #matricule>
+            <span  style="font-size: x-small;color:red;" *ngIf="modalForm.get('matricule')?.touched && errorControl['matricule'].errors">
+                Vérifier votre Matricule
+            </span>
+        </div>
+        <div class="col-6" style="padding: 5px;">
+            Salaire
+        </div>
+        <div class="col-6" style="padding: 5px;">
+            <input type="number" class="form-control" formControlName="salaire">
+            <span  style="font-size: x-small;color:red;" *ngIf="modalForm.get('salaire')?.touched && errorControl['salaire'].errors">
+                Vérifier votre Salaire
+            </span>
+        </div>
+        <div class="col-6" style="padding: 5px;">
+            Stuation famille
+        </div>
+        <div class="col-6" style="padding: 5px;">
+            <select class="form-control" formControlName="siuationfamille">
+                <option value="" selected disabled>Selectionner Stituation</option>
+                <option value="C">C</option>
+                <option value="M">M</option>
+                <option value="V">V</option>
+            </select>
+            <span  style="font-size: x-small;color:red;" *ngIf="modalForm.get('siuationfamille')?.touched && errorControl['siuationfamille'].errors">
+                Vérifier votre Stuation famille
+            </span>
+        </div>
+        <div class="col-6"></div>
+        <div class="col-6" style="padding: 5px;display: flex;flex-direction: row-reverse;">
+        <button type="submit" class="btn btn-outline-success" (click)="sendForm()" style="margin-left: 5px;">Save</button>
+         <button class="btn btn-outline-dark" (click)="toggleModal()">Annuler</button>
+        </div>
+    </div>
+  </form>
+</div>
+</div>
+
+
+<div style="position: fixed;width: 100%;height: 100%;top:0;background-color: rgba(0, 0, 0, 0.504);" *ngIf="progress">
+    <div class="spinner-border text-light" role="status" style="position: absolute;top: 50%;left: 50%;">
+  <span class="visually-hidden">Loading...</span>
+</div>
+</div>

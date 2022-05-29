@@ -1,0 +1,65 @@
+<div style="margin: 10px;">
+    <button class="btn btn-success"  (click)="addElement()" style="margin-right: 2px;">
+<img src="assets/images/add.svg" style="width: 20px;cursor: pointer;">
+Ajouter Absence
+</button>
+<button class="btn btn-info" (click)="init()" >
+<img src="assets/images/update.svg" style="width: 20px;cursor: pointer;" />
+Actualiser
+</button>
+</div>
+
+<ng2-smart-table [settings]="settings" [source]="listAbsences" (custom)="onCostumAction($event)"></ng2-smart-table>
+<div style="position: fixed;top:0;width: 100%;height: 100%;background-color: rgba(0, 0, 0, 0.483);"  [ngStyle]="{'display':modal?'block':'none' }">
+<div style="position: absolute;top: 10%;width: 70%;background-color: white;left: 50%;transform: translateX(-50%);padding: 30px;">
+  <form [formGroup]="modalForm" novalidate>
+    <div class="row">
+        <div class="col-6" style="padding: 5px;">
+            Collaborateur
+        </div>
+        <div class="col-6" style="padding: 5px;">
+            <input type="number" class="form-control" formControlName="collaborateur">
+        </div>
+        <div class="col-6" style="padding: 5px;">
+            Date debut
+        </div>
+        <div class="col-6" style="padding: 5px;">
+            <input type="date" class="form-control" formControlName="datedebut">
+        </div>
+        <div class="col-6" style="padding: 5px;">
+            Date fin
+        </div>
+        <div class="col-6" style="padding: 5px;">
+            <input type="date" class="form-control" formControlName="datefin">
+        </div>
+        <div class="col-6" style="padding: 5px;">
+            Identifiant
+        </div>
+        <div class="col-6" style="padding: 5px;">
+            <input type="number" class="form-control" formControlName="identifiant" readonly="readonly">
+        </div>
+        <div class="col-6" style="padding: 5px;">
+            Motif
+        </div>
+          <div class="col-6" style="padding: 5px;">
+            <select formControlName="motif" class="form-control">
+                <option value="" selected disabled>Selectionner motif</option>
+                <option value="{{motif['code']}}" *ngFor="let motif of motifs">{{motif['libelle']}}</option>
+            </select>
+        </div>
+        <div class="col-6"></div>
+        <div class="col-6" style="padding: 5px;display: flex;flex-direction: row-reverse;">
+        <button type="submit" class="btn btn-outline-success" (click)="sendForm()" style="margin-left: 5px;">Save</button>
+         <button class="btn btn-outline-dark" (click)="toggleModal()" >Annuler</button>
+        </div>
+    </div>
+  </form>
+</div>
+</div>
+
+
+<div style="position: fixed;width: 100%;height: 100%;top:0;background-color: rgba(0, 0, 0, 0.504);" *ngIf="progress">
+    <div class="spinner-border text-light" role="status" style="position: absolute;top: 50%;left: 50%;">
+  <span class="visually-hidden">Loading...</span>
+</div>
+</div>
